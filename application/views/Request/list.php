@@ -11,6 +11,7 @@
       <th><?=__('Sell Currency')?></th>
       <th><?=__('Comment')?></th>
       <th><?=__('Methods')?></th>
+      <th><?=__('Country')?></th>
       <th><?=__('Date created')?></th>
       <th><?=__('Run')?></th>
     </tr>
@@ -35,6 +36,7 @@
         }
       ?>
       </td>
+      <td><?=$request->country->name?></td>
       <td><?=date('H:i d.m.Y', strtotime($request->date_created))?></td>
       <td><a href="#">Accept bid!</a></td>
     </tr>

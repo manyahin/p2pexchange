@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `methods` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `request_methods` (
+CREATE TABLE IF NOT EXISTS `methods_requests` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `request_id` int(10) NOT NULL,
   `method_id` int(10) NOT NULL,

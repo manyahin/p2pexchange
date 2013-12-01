@@ -60,12 +60,6 @@
           <?= $message; ?>
         </h3>
       <? endif; ?>
-      <div id="methods">
-        <p>Method of transfer:</p>
-        <? foreach($methods as $method): ?>
-          <input type="checkbox" name="methods[]" value="<?=$method->id?>"><?=$method->name?></br>
-        <? endforeach; ?>
-      </div>
       <div id="countries">
         <p>Country:</p>
         <select name="country" id="country">
@@ -73,6 +67,12 @@
           <option value="<?=$country->id?>"><?=$country->name?></option>
         <? endforeach; ?>  
         </select>
+      </div>
+      <div id="methods">
+        <p>Method of transfer:</p>
+        <? foreach($methods as $method): ?>
+          <input type="checkbox" name="methods[]" value="<?=$method->id?>"><?=$method->name?></br>
+        <? endforeach; ?>
       </div>
     </div>
   </form> 
