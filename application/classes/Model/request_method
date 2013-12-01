@@ -2,6 +2,6 @@
 
 class Model_Request_Method extends ORM {
 
-  protected $_belongs_to = array('request' => array(), 'method' => array());
+  // protected $_belongs_to = array('request' => array(), 'method' => array());
 
 } 

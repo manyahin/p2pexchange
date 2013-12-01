@@ -6,7 +6,6 @@ class Controller_Request extends Controller_Site {
   {
     // Auth::instance()->login("my@email.com", "mypa55word");
 
-    // $this->template->content = 'content';
     $requests = ORM::factory('request')->order_by('id','DESC')->find_all();
     $count_requests = count($requests);
 
@@ -75,12 +74,18 @@ class Controller_Request extends Controller_Site {
         {
           $request->country_id = $post['country'];
         }
+        $request->save();
+
         if($post['methods'])
         {
           $request = ORM::factory('request', $request->id);
-          $request->add('methods',$post['methods'][0]);
+          if(count($post['methods']) > 1)
+            foreach($post['methods'] as $method)
+              $request->add('methods',$method);
+          else        
+            $request->add('methods',$post['methods'][0]);        
         }
-        $request->save();
+        
 
         // Reset values so form is not sticky
         $_POST = array();

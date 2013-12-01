@@ -8,6 +8,12 @@ class Model_Request extends ORM {
     'sell_currency_name' => array('model' => 'currency', 'foreign_key' => 'sell_currency')
   );
 
-  protected $_has_many = array('methods' => array('model' => 'method', 'through' => 'request_method'));
+
+  protected $_has_many = array(
+      'methods' => array(
+          'model'   => 'method',
+          'through' => 'methods_requests',
+      ),
+  );
 
 } 

@@ -10,7 +10,9 @@
       <th><?=__('Sell Sum')?></th>
       <th><?=__('Sell Currency')?></th>
       <th><?=__('Comment')?></th>
+      <th><?=__('Methods')?></th>
       <th><?=__('Date created')?></th>
+      <th><?=__('Run')?></th>
     </tr>
   </thead>
   <tbody>
@@ -23,7 +25,18 @@
       <td><?=$request->sell_sum?></td>
       <td><?=$request->sell_currency_name->name?></td>
       <td><?=$request->comment?></td>
+      <td>
+      <?
+        $methods = $request->methods->find_all();
+        if(count($methods)>0) {
+          foreach ($methods as $key => $method) {
+            echo $method->name.'</br>';
+          }
+        }
+      ?>
+      </td>
       <td><?=date('H:i d.m.Y', strtotime($request->date_created))?></td>
+      <td><a href="#">Accept bid!</a></td>
     </tr>
   <? endforeach; ?>
   </tbody>

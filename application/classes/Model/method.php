@@ -5,7 +5,7 @@ class Model_Method extends ORM {
   protected $_has_many = array(
     'requests' => array(
         'model'   => 'request',
-        'through' => 'request_method',
+        'through' => 'methods_requests',
       ),
   );
 
