@@ -1,0 +1,18 @@
+#container {
+  margin: 0 2em;
+}
+
+.lang_name {
+  display:inline-block !important;
+}
+
+/* Bid */
+
+#methods, #countries {
+  display: none;
+  font-size: 13px;
+}
+
+#methods input {
+  margin: 0 6px 2px 0;
+}
