@@ -106,6 +106,20 @@ CREATE TABLE IF NOT EXISTS `countries` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 INSERT INTO countries VALUES(0,'Israel');
+INSERT INTO countries VALUES(0,'USA');
+
+CREATE TABLE IF NOT EXISTS `acceptors` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `request_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date_created` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+VasyaVasya
+BabraBabra
+
 
 [11/12/13, 1:21:18 PM] Alen Kaminski: Bank Code Name
 20  Mizrahi Tefahot Bank

@@ -28,6 +28,14 @@
       <td><?=$request->comment?></td>
       <td>
       <?
+        $acceptors = $request->acceptors->find_all();
+        foreach($acceptors as $ac) {
+          echo $ac->user->username . '</br>';
+          echo $ac->request->id . '</br>';
+          echo $ac->user_id . '</br>';
+          echo $ac->date_created . '</br>';
+        }
+
         $methods = $request->methods->find_all();
         if(count($methods)>0) {
           foreach ($methods as $key => $method) {
@@ -38,7 +46,7 @@
       </td>
       <td><?=$request->country->name?></td>
       <td><?=date('H:i d.m.Y', strtotime($request->date_created))?></td>
-      <td><a href="#">Accept bid!</a></td>
+      <td><a href="/request/accept/<?=$request->id?>">Accept bid!</a></td>
     </tr>
   <? endforeach; ?>
   </tbody>

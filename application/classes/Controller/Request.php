@@ -76,7 +76,7 @@ class Controller_Request extends Controller_Site {
         }
         $request->save();
 
-        if($post['methods'])
+        if(isset($post['methods']))
         {
           $request = ORM::factory('request', $request->id);
           if(count($post['methods']) > 1)
@@ -104,4 +104,51 @@ class Controller_Request extends Controller_Site {
     }
   }
 
-} // End Welcome
+  public function action_accept()
+  {
+    if(!$this->user) $this->redirect('/');
+
+    $request_id = $this->request->param('id');
+    $request = ORM::factory('request', $request_id);
+    
+    if($request->user_id == $this->user->id)
+      die('Denied to accept yourself bid');
+
+    $double = $request->acceptors->where('user_id','=',$this->user->id)->find_all();
+    if(count($double) > 0) 
+      die('Denied to again accept bid');
+
+    $this->template->content = View::factory('Request/accept')
+      ->bind('user', $this->user)
+      ->bind('request', $request)
+      ->bind('errors', $errors)
+      ->bind('message', $message);
+
+    try {
+      
+      $acceptor = ORM::factory('acceptor');
+      $acceptor->request_id = $request_id;
+      $acceptor->user_id = $this->user->id;
+      $acceptor->date_created = DB::expr('NOW()');
+      $acceptor->save();
+    
+      $message = "You have accept bid";
+
+    } catch (ORM_Validation_Exception $e) {
+
+      $message = 'There were errors, please see form below.';
+      $errors = $e->errors('models');
+    
+    }
+
+  }
+
+}
+
+
+
+
+
+
+
+

@@ -111,3 +111,21 @@
 #5 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
 #6 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/index.php(118): Kohana_Request->execute()
 #7 {main} in /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/application/classes/Controller/Request.php:79
+2013-12-01 18:19:06 --- EMERGENCY: ErrorException [ 8 ]: Undefined index: methods ~ APPPATH/classes/Controller/Request.php [ 79 ] in /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/application/classes/Controller/Request.php:79
+2013-12-01 18:19:06 --- DEBUG: #0 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/application/classes/Controller/Request.php(79): Kohana_Core::error_handler(8, 'Undefined index...', '/Users/Manyahin...', 79, Array)
+#1 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/system/classes/Kohana/Controller.php(84): Controller_Request->action_create()
+#2 [internal function]: Kohana_Controller->execute()
+#3 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Request))
+#4 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/index.php(118): Kohana_Request->execute()
+#7 {main} in /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/application/classes/Controller/Request.php:79
+2013-12-01 18:19:17 --- EMERGENCY: ErrorException [ 8 ]: Undefined index: methods ~ APPPATH/classes/Controller/Request.php [ 79 ] in /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/application/classes/Controller/Request.php:79
+2013-12-01 18:19:17 --- DEBUG: #0 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/application/classes/Controller/Request.php(79): Kohana_Core::error_handler(8, 'Undefined index...', '/Users/Manyahin...', 79, Array)
+#1 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/system/classes/Kohana/Controller.php(84): Controller_Request->action_create()
+#2 [internal function]: Kohana_Controller->execute()
+#3 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Request))
+#4 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/index.php(118): Kohana_Request->execute()
+#7 {main} in /Users/Manyahin/Dropbox/_PROJECTS/p2pexchange/www/application/classes/Controller/Request.php:79

@@ -15,6 +15,10 @@ class Model_Request extends ORM {
       'model'   => 'method',
       'through' => 'methods_requests',
     ),
+    'acceptors' => array(
+      'model' => 'acceptor',
+      'foreign_key' => 'request_id'
+    )
   );
 
 } 
