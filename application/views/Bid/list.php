@@ -19,7 +19,7 @@
   <tbody>
   <? foreach($requests as $request): ?>
     <tr>
-      <td><a href="/request/info/<?=$request->id?>"><?=$request->id?></a></td>
+      <td><a href="/bid/info/<?=$request->id?>"><?=$request->id?></a></td>
       <td><a href="/user/info/<?=$request->user->id?>"><?=$request->user->username?></a></td>
       <td><?=$request->want_sum?></td>
       <td><?=$request->want_currency_name->name?></td>
@@ -28,14 +28,6 @@
       <td><?=$request->comment?></td>
       <td>
       <?
-        $acceptors = $request->acceptors->find_all();
-        foreach($acceptors as $ac) {
-          echo $ac->user->username . '</br>';
-          echo $ac->request->id . '</br>';
-          echo $ac->user_id . '</br>';
-          echo $ac->date_created . '</br>';
-        }
-
         $methods = $request->methods->find_all();
         if(count($methods)>0) {
           foreach ($methods as $key => $method) {
@@ -46,7 +38,7 @@
       </td>
       <td><?=$request->country->name?></td>
       <td><?=date('H:i d.m.Y', strtotime($request->date_created))?></td>
-      <td><a href="/request/accept/<?=$request->id?>">Accept bid!</a></td>
+      <td><a href="/bid/accept/<?=$request->id?>">Accept bid!</a></td>
     </tr>
   <? endforeach; ?>
   </tbody>

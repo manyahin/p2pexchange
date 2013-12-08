@@ -13,6 +13,19 @@
   font-size: 13px;
 }
 
-#methods input {
-  margin: 0 6px 2px 0;
+
+
+/* Forms */
+
+form .error {
+  font-size: 12px;
+  color: red;
+}
+
+form #methods input {
+  margin: 0 0px 3px 0;
+}
+
+form #methods label {
+  margin-left: 2px;
 }

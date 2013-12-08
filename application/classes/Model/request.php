@@ -9,7 +9,6 @@ class Model_Request extends ORM {
     'country' => array('model' => 'country')
   );
 
-
   protected $_has_many = array(
     'methods' => array(
       'model'   => 'method',
@@ -20,5 +19,52 @@ class Model_Request extends ORM {
       'foreign_key' => 'request_id'
     )
   );
+
+  public function rules()
+  {
+    return array(
+      'want_sum' => array(
+        array('not_empty'),
+        array('numeric'),
+      ),
+      'sell_sum' => array(
+        array('not_empty'),
+        array('numeric')
+      ),
+      'want_currency' => array(
+        array('not_empty'),
+        array(array($this, 'not_minus')),
+        // array(array($this, 'have_methods'))
+      ),
+      'sell_currency' => array(
+        array('not_empty'),
+        array(array($this, 'not_minus')),
+        // array(array($this, 'have_methods'))
+      )
+    );
+  }
+
+  public function not_minus($value)
+  {
+    return $value != -1;
+  }
+
+  public function have_methods($cur_id)
+  {
+
+    $currencies = ORM::factory('currency')
+      ->where('category_id','=','4')->find_all()->as_array();
+
+    if(in_array($this->want_currency, $currencies)
+      || in_array($this->sell_currency, $currencies))
+      {
+
+        die('Cash');
+        // if(!isset($post['methods']) || count($post['methods']) < 1)
+        // {
+          
+        // }
+      }
+  }
 
 } 

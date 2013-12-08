@@ -2,7 +2,6 @@
 
 class Controller_Site extends Controller_Template {
 
-  public $template = 'site';
   public $user;
 
   public function before() 
@@ -13,16 +12,12 @@ class Controller_Site extends Controller_Template {
     $auth_user = Auth::instance()->get_user();
     if($auth_user)
     {
-      if($auth_user->has('roles',1))
-      {
-        $this->user = $auth_user;
-      }
-      elseif($auth_user->has('roles',2))
-      { 
-        $this->user = $auth_user;
-        $this->admin = true;
-      }
+      $this->user = $auth_user;
+      if($auth_user->has('roles',2))
+        $this->user->admin = true;
     }
+
+    View::set_global('user',$this->user);
 
     // Language
     I18n::lang(Cookie::get('lang', 'ru')); // устанавливаем язык из Куки, либо ставим русский, если Куки нету
@@ -32,9 +27,24 @@ class Controller_Site extends Controller_Template {
        I18n::lang(strip_tags(Arr::get($_GET, 'lang'))); // меняем текущий язык на выбранный
     }
 
-    // For all pages;
-    $this->template->user = $this->user;
-    $this->template->language = I18n::lang();
+    View::set_global('language', I18n::lang());
+
+    // Site config
+    $settings = Kohana::$config->load('p2p');
+    $this->template->title = $settings->title;
+    $this->template->description = $settings->description;
+
+    // Styles
+    $styles = array('normalize');
+    if(I18n::lang() == 'he')
+      array_push($styles,'foundation.he');
+    else
+      array_push($styles,'foundation');
+    array_push($styles, 'app');
+    $this->template->styles = $styles;
+
+    // Scripts
+
 
   } 
 }

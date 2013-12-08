@@ -82,6 +82,7 @@ if (isset($_SERVER['SERVER_PROTOCOL']))
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
+Kohana::$environment = Kohana::DEVELOPMENT;
 if (isset($_SERVER['KOHANA_ENV']))
 {
 	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
@@ -103,7 +104,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => 'http://127.0.0.1:8000/',
+	'base_url'   => 'http://10.0.0.12:8000/',
 ));
 
 /**
@@ -137,8 +138,14 @@ Cookie::$salt = '6fa7b1899c81eafcb0b2d84a5eba357f';
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+Route::set('about', 'about')
+	->defaults(array(
+		'controller' => 'page',
+		'action' => 'about'
+	));
+
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'request',
+		'controller' => 'bid',
 		'action'     => 'index',
 	));

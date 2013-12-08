@@ -105,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `countries` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+INSERT INTO countries VALUES(0,'All world');
 INSERT INTO countries VALUES(0,'Israel');
 INSERT INTO countries VALUES(0,'USA');
 
@@ -115,6 +116,8 @@ CREATE TABLE IF NOT EXISTS `acceptors` (
   `date_created` DATETIME NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+ALTER TABLE `users` ADD COLUMN `phone` varchar(100) AFTER `username`;
 
 
 VasyaVasya

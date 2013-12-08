@@ -12,13 +12,13 @@ class Model_Acceptor extends ORM {
     return array(
       'user_id' => array(
         array('not_empty'),
-        array(array($this, 'accept_again')),
+        // array(array($this, 'accept_again'))
       ),
       'request_id' => array(
         array('not_empty'),
       ),
-      'date_created' = array(
-        array('not_empty')
+      'date_created' => array(
+        array('not_empty'),
       )
     );
   }

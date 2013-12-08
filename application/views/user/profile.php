@@ -1,16 +1,23 @@
 <h3><?=__('Profile of user :user', array(':user' => $user->username))?></h3>
-<form action="" method="POST">
-  <label for="email">Email</label>
-  <input type="text" name="email" value="<?=$user->email?>">
-  <label for="wmid">WMID</label>
-  <input type="text" name="wmid">
-  <label for="name">Name/LastName</label>
-  <input type="text" name="name">
-  <label for="docs">Documents</label>
-  <input type="file" name="docs">
-  <label for="phone">Phone</label>
-  <input type="text" name="phone">
-  <label for="icq">ICQ</label>
+<? if ($message) : ?>
+  <h5 class="message">
+    <?= $message; ?>
+  </h5>
+<? endif; ?>
+<?= Form::open()?>
+  <?= Form::label('username', 'Username')?>
+  <?= Form::input('username', $user->username, array('disabled' => 'disabled'))?>
+  <?= Form::label('email', 'Email')?>
+  <?= Form::input('email', $user->email, array('disabled' => 'disabled'))?>
+<!--   <label for="wmid">WMID</label>
+  <input type="text" name="wmid"> -->
+  <!-- <label for="name">Name/LastName</label>
+  <input type="text" name="name"> -->
+  <!-- <label for="docs">Documents</label>
+  <input type="file" name="docs"> -->
+  <?= Form::label('phone', 'Phone (Hidden)')?>
+  <?= Form::input('phone', $user->phone)?>
+  <!-- <label for="icq">ICQ</label>
   <input type="text" name="icq">
   <label for="site">Web Site</label>
   <input type="text" name="site">
@@ -21,6 +28,6 @@
   <label for="qiwi">Qiwi</label>
   <input type="text" name="qiwi">
   <label for="yandex">Yandex.Money (Do not use in Israel?)</label>
-  <input type="text" name="yandex">
-  <input type="submit" class="button radius">
-</form>
+  <input type="text" name="yandex"> -->
+  <?= Form::button('submit', 'Save profil', array('class' => 'button small round', 'type' => 'submit')); ?>
+<?= Form::close()?>

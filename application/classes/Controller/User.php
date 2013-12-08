@@ -5,12 +5,38 @@ class Controller_User extends Controller_Site {
   public function action_index()
   {
     $this->template->content = View::factory('user/profile')
-      ->bind('user', $this->user);
+      ->bind('user', $this->user)
+      ->bind('message', $message);
 
     // if a user is not logged in, redirect to login page
     if (!$this->user)
     {
       $this->redirect('/user/login');
+    }
+
+    if (HTTP_Request::POST == $this->request->method())
+    {
+      $post = $this->request->post();
+
+      try {
+        // Update user from POST data
+        $user = ORM::factory('user', $this->user->id);
+        $user->phone = $post['phone'];
+        $user->save();
+        
+        // Update data;
+        $this->user = $user;
+
+        $message = 'Profile saved!';
+
+      } catch (ORM_Validation_Exception $e) {
+        
+        // Set failure message
+        $message = 'There were errors, please see form below.';
+        
+        // Set errors using custom messages
+        $errors = $e->errors('models');
+      }
     }
   }
 
@@ -27,8 +53,8 @@ class Controller_User extends Controller_Site {
       }
     }
 
-    $view = View::factory('user/info')->
-      bind('user', $user);
+    $view = View::factory('user/info')
+      ->set('user', $user);
 
     $this->template->content = $view;
   }

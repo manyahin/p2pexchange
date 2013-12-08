@@ -24,6 +24,7 @@ class Kohana_Kohana_Exception extends Exception {
 		E_RECOVERABLE_ERROR  => 'Recoverable Error',
 		E_DEPRECATED         => 'Deprecated',
 	);
+	
 
 	/**
 	 * @var  string  error rendering view
