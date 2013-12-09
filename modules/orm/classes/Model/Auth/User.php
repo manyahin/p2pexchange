@@ -19,6 +19,7 @@ class Model_Auth_User extends ORM {
 		'roles'       => array('model' => 'Role', 'through' => 'roles_users'),
 	);
 
+
 	/**
 	 * Rules for the user model. Because the password is _always_ a hash
 	 * when it's set,you need to run an additional not_empty rule in your controller

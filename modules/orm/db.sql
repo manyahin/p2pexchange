@@ -118,7 +118,11 @@ CREATE TABLE IF NOT EXISTS `acceptors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 ALTER TABLE `users` ADD COLUMN `phone` varchar(100) AFTER `username`;
+ALTER TABLE `users` ADD COLUMN `date_registration` DATETIME AFTER `last_login`;
 
+
+***
+requests.user_id => requests.user_created_id
 
 VasyaVasya
 BabraBabra

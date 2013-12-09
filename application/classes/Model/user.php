@@ -2,6 +2,13 @@
 
 class Model_User extends Model_Auth_User {
 
-  // This class can be replaced or extended
+  protected $_has_many = array(
+    'user_tokens' => array('model' => 'User_Token'),
+    'roles'       => array('model' => 'Role', 'through' => 'roles_users'),
+    'bids' => array(
+      'model'       => 'request',
+      'foreign_key' => 'user_id',
+    ),
+  );
 
 } // End User Model

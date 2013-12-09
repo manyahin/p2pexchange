@@ -43,6 +43,8 @@ class Controller_User extends Controller_Site {
   public function action_info()
   {
     $user = false;
+    $merged_bids = false;
+    
     $user_id = $this->request->param('id');
     if($user_id)
     {
@@ -50,11 +52,30 @@ class Controller_User extends Controller_Site {
       if($user_db->loaded())
       {
         $user = $user_db;
+
+        // Get all users, who accept above one bid
+        $all_acceptors = array();
+        $bids = $user->bids->find_all();
+        if(count($bids) > 0) {
+          foreach ($bids as $key => $bid) {
+            $acceptors = $bid->acceptors->find_all();
+            if(count($acceptors) > 0) {
+              foreach ($acceptors as $key => $acceptor) {
+                array_push($all_acceptors, $acceptor->user->id); 
+              }
+            }
+          }  
+        }
+
+        if(in_array($this->user->id, $all_acceptors))
+          $merged_bids = true;  
+
       }
     }
 
     $view = View::factory('user/info')
-      ->set('user_profil', $user);
+      ->set('user_profile', $user)
+      ->set('merged_bids', $merged_bids); // set what have merged bids.
 
     $this->template->content = $view;
   }
