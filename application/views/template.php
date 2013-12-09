@@ -51,6 +51,7 @@
   </div>
   <div class="row">
     <div class="large-12 columns">
+    </br></br>
       <div class="panel">
         <small>loading time in seconds: <?=(microtime(true) - KOHANA_START_TIME)/6;?></small></br>
         <small>memory usage: <?=(memory_get_usage() - KOHANA_START_MEMORY)?></small>

@@ -44,7 +44,7 @@ class Controller_User extends Controller_Site {
   {
     $user = false;
     $merged_bids = false;
-    
+
     $user_id = $this->request->param('id');
     if($user_id)
     {
@@ -74,6 +74,66 @@ class Controller_User extends Controller_Site {
     }
 
     $view = View::factory('user/info')
+      ->set('user_profile', $user)
+      ->set('merged_bids', $merged_bids); // set what have merged bids.
+
+    $this->template->content = $view;
+  }
+
+  public function action_rating()
+  {
+    $user = false;
+
+    $user_id = $this->request->param('id');
+    if($user_id)
+    {
+      $user_db = ORM::factory('user', $user_id);
+      if($user_db->loaded())
+      {
+        $user = $user_db;
+      }
+    }
+
+    $view = View::factory('user/rating')
+      ->set('user_profile', $user);
+
+    $this->template->content = $view;
+  }
+
+  public function action_bids() 
+  {
+    $user = false;
+    $merged_bids = false;
+
+    $user_id = $this->request->param('id');
+    if($user_id)
+    {
+      $user_db = ORM::factory('user', $user_id);
+      if($user_db->loaded())
+      {
+        $user = $user_db;
+      }
+      
+      // Get all users, who accept above one bid
+      $all_acceptors = array();
+      $bids = $user->bids->find_all();
+      if(count($bids) > 0) {
+        foreach ($bids as $key => $bid) {
+          $acceptors = $bid->acceptors->find_all();
+          if(count($acceptors) > 0) {
+            foreach ($acceptors as $key => $acceptor) {
+              if($acceptor->user->id === $this->user->id)
+              {
+                $merged_bids[$bid->id] = $bid;
+              }
+            }
+          }
+        }  
+      }
+
+    }
+
+    $view = View::factory('user/bids')
       ->set('user_profile', $user)
       ->set('merged_bids', $merged_bids); // set what have merged bids.
 
