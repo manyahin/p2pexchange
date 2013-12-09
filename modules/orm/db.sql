@@ -123,6 +123,7 @@ ALTER TABLE `users` ADD COLUMN `date_registration` DATETIME AFTER `last_login`;
 
 ***
 requests.user_id => requests.user_created_id
+active or not in requests
 
 VasyaVasya
 BabraBabra

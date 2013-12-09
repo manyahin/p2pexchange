@@ -22,11 +22,12 @@
   <? endif; ?>
 
   <ul>
-    <li>Login: <?= $user_profile->username; ?></li>
-    <li>Date of registration: <?= $user_profile->date_registration; ?></li>
-    <li>Email: <?= $user_profile->email; ?></li>
-    <li>Number of logins: <?= $user_profile->logins; ?></li>
-    <li>Last Login: <?= Date::fuzzy_span($user_profile->last_login); ?></li>
+    <li><strong>Login:</strong> <?= $user_profile->username; ?></li>
+    <li><strong>Date of registration:</strong> <?= ($merged_bids) ? $user_profile->date_registration : 'для вас скрыто'; ?></li>
+    <li><strong>Email:</strong> <?= ($merged_bids) ? $user_profile->email : 'для вас скрыто'; ?></li>
+    <li><strong>Number of logins:</strong> <?= ($merged_bids) ? $user_profile->logins : 'для вас скрыто'; ?></li>
+    <li><strong>Last Login:</strong> <?= ($merged_bids) ? Date::fuzzy_span($user_profile->last_login) : 'для вас скрыто'; ?></li>
+    <li><strong>Phone:</strong> <?= ($merged_bids) ?$user_profile->phone : 'для вас скрыто'; ?></li>
   </ul>
 
 <? endif; ?>
