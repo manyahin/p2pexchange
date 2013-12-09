@@ -54,7 +54,7 @@ class Controller_User extends Controller_Site {
     }
 
     $view = View::factory('user/info')
-      ->set('user', $user);
+      ->set('user_profil', $user);
 
     $this->template->content = $view;
   }
@@ -68,13 +68,17 @@ class Controller_User extends Controller_Site {
     if (HTTP_Request::POST == $this->request->method()) 
     {     
       try {
-    
+  
         // Create the user using form values
         $user = ORM::factory('user')->create_user($this->request->post(), array(
           'username',
           'password',
-          'email'       
+          'email', 
         ));
+
+        // Add date of registration
+        $user->date_registration = DB::expr('NOW()');
+        $user->save();
         
         // Grant user login role
         $user->add('roles', ORM::factory('role', array('name' => 'login')));
