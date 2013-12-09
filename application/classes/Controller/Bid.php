@@ -142,7 +142,8 @@ class Controller_Bid extends Controller_Site {
       ->bind('user', $this->user)
       ->bind('request', $request)
       ->bind('errors', $errors)
-      ->bind('message', $message);
+      ->bind('message', $message)
+      ->bind('user_created', $user_created);
 
     if (HTTP_Request::GET == $this->request->method()
       && empty($errors))
@@ -155,6 +156,8 @@ class Controller_Bid extends Controller_Site {
         $acceptor->date_created = DB::expr('NOW()');
         $acceptor->save();
       
+        $user_created = $request->user;
+
         $message = "You have accept bid";
 
       } catch (ORM_Validation_Exception $e) {
