@@ -38,7 +38,21 @@
       </td>
       <td><?=$request->country->name?></td>
       <td><?=date('H:i d.m.Y', strtotime($request->date_created))?></td>
-      <td><a href="/bid/accept/<?=$request->id?>">Accept bid!</a></td>
+      <td>
+        <?
+          // TODO: This is not for view!
+          $accept = false;
+          if(isset($user) && $user->id) {
+            $accept_orm = ORM::factory('acceptor')
+              ->where('request_id','=',$request->id)
+              ->and_where('user_id','=',$user->id)
+              ->find(); 
+            if($accept_orm->loaded())
+              $accept = true;
+          }
+        ?>
+        <?=($accept) ? HTML::anchor('/user/info/'.$request->user->id,'Show user') : HTML::anchor('/bid/accept/'.$request->id,'Accept bid') ?>
+      </td>
     </tr>
   <? endforeach; ?>
   </tbody>

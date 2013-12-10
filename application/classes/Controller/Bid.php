@@ -124,7 +124,7 @@ class Controller_Bid extends Controller_Site {
 
   public function action_accept()
   {
-    if(!$this->user) $this->redirect('/');
+    if(!$this->user) $this->redirect('/user/login');
 
     $request_id = $this->request->param('id');
     $request = ORM::factory('request', $request_id);
