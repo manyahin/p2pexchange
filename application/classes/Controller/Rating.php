@@ -7,25 +7,17 @@ class Controller_Rating extends Controller_Site {
     $bid_id = $this->request->param('id');
     $bid = ORM::factory('request', $bid_id);
     if(!$bid->loaded()) // Check of bid exist;
-      $this->redirect('/');
+      die('This bid do not exists!');
 
     $acceptor = $bid->acceptors->where('user_id','=',$this->user->id)->find();
     if(!$acceptor->loaded()) // Check for this bid have acception from this user;
-      $this->redirect('/');
+      die('You do not have acceptions with this user!');
 
     $rating = $acceptor->rating->where('from_user_id','=',$this->user->id)
       ->and_where('to_user_id','=',$bid->user_id)
       ->and_where('accept_id','=',$acceptor->id); // Check for double set ratings;
     if($rating->loaded())
-      $this->redirect('/');
-
-    $rating = $acceptor->rating->where('from_user_id','=',$this->user->id)
-      ->and_where('to_user_id','=',$bid->user_id)
-      ->and_where('accept_id','=',$acceptor->id)
-      ->find();
-
-    if(!$rating->loaded()) // Check for ratings from these users to this bid;
-      $this->redirect('/');
+      die('You already set rating fot this bid!');
 
     $error = false;
     $message = false;
@@ -55,12 +47,18 @@ class Controller_Rating extends Controller_Site {
     
     }
 
+    // if ($this->request->is_ajax())
+
     $view = View::factory('rating/set')
       ->bind('error', $error)
       ->bind('message', $message)
-      ->bind('values', $values);
+      ->bind('values', $values)
+      ->bind('bid',$bid);
 
-    $this->template->content = $view;
+    $this->auto_render = false;
+    $this->content = $view;
+    $this->response->body($this->content->render());
+
   } 
 
 }

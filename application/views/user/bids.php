@@ -36,7 +36,21 @@
           ?>
           <td><?=$accept->date_created?></td>
           <td>еще нет</td>
-          <td><?= HTML::anchor('/rating/'.$bid->id, 'еще нет') ?></td>
+          <td>
+            <? // TODO: this is not for view~!
+              $rating = ORM::factory('rating')
+                ->where('from_user_id','=',$user->id)
+                ->and_where('to_user_id','=',$user_profile->id)
+                ->and_where('accept_id','=',$accept->id)
+                ->find();
+              if($rating->loaded()) {
+                echo HTML::rating($rating->rating);
+                echo '</br><small>'.$rating->date_created.'</small>';
+              } else {
+                echo HTML::anchor('/rating/'.$bid->id, 'еще нет', array('data-reveal-id' => 'ratingModal', 'data-reveal-ajax' => 'true'));
+              }
+            ?>
+          </td>
         </tr>
       <? endforeach; ?>
       </tbody>
@@ -46,3 +60,4 @@
   <? endif; ?>
 
 <? endif; ?>
+<div id="ratingModal" class="reveal-modal small" data-reveal></div>

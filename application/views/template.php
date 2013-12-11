@@ -12,6 +12,7 @@
   <?= HTML::script('public/js/vendor/jquery.js'); ?>
 </head>
 <body>
+
   <div id="container">
     <div class="row">
       <div class="small-12 large-12 columns">
@@ -60,6 +61,7 @@
   </div>
   <?= HTML::script('public/js/foundation/foundation.js'); ?>
   <?= HTML::script('public/js/foundation/foundation.alert.js'); ?>
+  <?= HTML::script('public/js/foundation/foundation.reveal.js'); ?>
   <script>
     $(document).foundation();
   </script>
