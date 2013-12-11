@@ -11,6 +11,28 @@
 
   <p>Здесь показаны все оценки, которые этот пользователь получил от других пользователей.</p>
 
-  <i>In progress...<i>
+  <table>
+    <thead>
+      <tr>
+        <th>№ Заявки</th>
+        <th>Кто поставил оценку</th>
+        <th>Оценка</th>
+        <th>Комментарий</th>
+        <th>Дата оценки</th>
+      </tr>
+    </thead>
+    <tbody>
+    <? foreach($ratings as $rating): ?>
+      <tr>
+        <td><?= HTML::anchor('/bid/info/'.$rating->accept->request->id,
+          $rating->accept->request->id) ?></td>
+        <td><?= HTML::anchor('/user/info/'.$rating->from_user->id, $rating->from_user->username) ?></td>
+        <td><?= HTML::rating($rating->rating); ?></td>
+        <td><?= $rating->comment; ?></td>
+        <td><?= $rating->date_created; ?></td>  
+      </tr>
+    <? endforeach; ?>
+    </tbody>
+  </table>
 
 <? endif; ?>

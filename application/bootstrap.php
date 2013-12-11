@@ -105,6 +105,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => 'http://10.0.0.12:8000/',
+	'index_file' => '',
 ));
 
 /**
@@ -138,6 +139,12 @@ Cookie::$salt = '6fa7b1899c81eafcb0b2d84a5eba357f';
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+Route::set('rating','rating/<id>')
+	->defaults(array(
+		'controller' => 'rating',
+		'action' => 'set'
+	));
+
 Route::set('about', 'about')
 	->defaults(array(
 		'controller' => 'page',

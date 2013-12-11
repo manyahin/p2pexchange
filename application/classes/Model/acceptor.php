@@ -7,6 +7,10 @@ class Model_Acceptor extends ORM {
     'request' => array('model' => 'request', 'foreign_key' => 'request_id')
   );
 
+  protected $_has_one = array(
+    'rating' => array('model' => 'rating', 'foreign_key' => 'accept_id')
+  );
+
   public function rules()
   {
     return array(

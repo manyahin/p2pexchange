@@ -120,6 +120,18 @@ CREATE TABLE IF NOT EXISTS `acceptors` (
 ALTER TABLE `users` ADD COLUMN `phone` varchar(100) AFTER `username`;
 ALTER TABLE `users` ADD COLUMN `date_registration` DATETIME AFTER `last_login`;
 
+CREATE TABLE IF NOT EXISTS `ratings` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `accept_id` int(10) NOT NULL,
+  `from_user_id` int(10) NOT NULL,
+  `to_user_id` int(10) NOT NULL,
+  `rating` INT(1) NOT NULL,
+  `comment` varchar(254) NULL,
+  `date_created` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+INSERT INTO `ratings` VALUES(0,11,2,'First rating',NOW());
 
 ***
 requests.user_id => requests.user_created_id

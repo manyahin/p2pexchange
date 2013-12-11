@@ -94,8 +94,11 @@ class Controller_User extends Controller_Site {
       }
     }
 
+    $ratings = ORM::factory('rating')->where('to_user_id','=',$user_id)->find_all();
+
     $view = View::factory('user/rating')
-      ->set('user_profile', $user);
+      ->set('user_profile', $user)
+      ->set('ratings', $ratings);
 
     $this->template->content = $view;
   }

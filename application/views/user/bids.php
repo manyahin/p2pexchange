@@ -36,7 +36,7 @@
           ?>
           <td><?=$accept->date_created?></td>
           <td>еще нет</td>
-          <td>еще нет</td>
+          <td><?= HTML::anchor('/rating/'.$bid->id, 'еще нет') ?></td>
         </tr>
       <? endforeach; ?>
       </tbody>

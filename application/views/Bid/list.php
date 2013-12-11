@@ -49,6 +49,10 @@
               ->find(); 
             if($accept_orm->loaded())
               $accept = true;
+          } elseif (isset($user) && $request->user->id === $user->id) {
+            
+          } else {
+            
           }
         ?>
         <?=($accept) ? HTML::anchor('/user/info/'.$request->user->id,'Show user') : HTML::anchor('/bid/accept/'.$request->id,'Accept bid') ?>
