@@ -34,12 +34,12 @@
           <li><a href="/"><?=__('Index')?></a></li>
           <li><a href="/about" class="about"><?=__('About')?></a></li>
           <? if(isset($user)): ?>
-            <li><a href="/user/"><?=__('Profile')?></a></li>
+            <li><a href="/my/profile"><?=__('Profile')?></a></li>
             <li><a href="/bid/create" class="request"><?=__('New bid')?></a></li>
-            <li><a href="/user/logout"><?=__('Logout')?></a></li>
+            <li><a href="/logout"><?=__('Logout')?></a></li>
           <? else: ?>
-            <li><a href="/user/login" class="login"><?=__('Login')?></a></li>
-            <li><a href="/user/create" class="registration"><?=__('Registration')?></a></li>
+            <li><a href="/login" class="login"><?=__('Login')?></a></li>
+            <li><a href="/register" class="register"><?=__('Register')?></a></li>
           <? endif; ?>
           
           <li><?=__('Lang')?>: <a class="lang_name" href="?lang=en">EN</a>/<a class="lang_name" href="?lang=he">HE</a></li>

@@ -1,9 +1,19 @@
-<h3><?=__('Profile of user :user', array(':user' => $user->username))?></h3>
+<h3><?=__('Your account', array(':user' => $user->username))?></h3>
 <? if ($message) : ?>
   <h5 class="message">
     <?= $message; ?>
   </h5>
 <? endif; ?>
+
+<dl class="sub-nav">
+  <dd class="active"><?=HTML::anchor('my/profile','Profile')?></dd>
+  <dd><?=HTML::anchor('my/ratings/','Ratings')?></dd>
+  <dd><?=HTML::anchor('my/settings/','Settings')?></dd>
+  <dd><?=HTML::anchor('my/status/','Status')?></dd>
+  <dd><?=HTML::anchor('my/bids/','Bids')?></dd>
+  <dd><?=HTML::anchor('my/subscription/','Subscription')?></dd>
+</dl>
+
 <?= Form::open()?>
   <?= Form::label('username', 'Username')?>
   <?= Form::input('username', $user->username, array('disabled' => 'disabled'))?>

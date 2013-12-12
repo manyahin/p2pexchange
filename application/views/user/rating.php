@@ -35,4 +35,6 @@
     </tbody>
   </table>
 
+  <p>Итого рейтинг пользователя: <?=$user_profile->rating();?></p>
+
 <? endif; ?>

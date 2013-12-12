@@ -21,6 +21,8 @@
 
   <? endif; ?>
 
+  <p>Rating: <?=$user_profile->rating();?>|<?=$user_profile->count_ratings();?></p>
+
   <ul>
     <li><strong>Login:</strong> <?= $user_profile->username; ?></li>
     <li><strong>Date of registration:</strong> <?= ($merged_bids) ? $user_profile->date_registration : 'для вас скрыто'; ?></li>

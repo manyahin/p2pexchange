@@ -139,6 +139,16 @@ Cookie::$salt = '6fa7b1899c81eafcb0b2d84a5eba357f';
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+// Route::set('my', 'my/<action>', array('action' => 'profile|ratings|settings|status|bids|subscription'))
+// 	->defaults(array(
+// 		'controller' => 'my'
+// 		));
+
+Route::set('user','<action>', array('action' => 'login|logout|register'))
+	->defaults(array(
+		'controller' => 'user'
+		));
+
 Route::set('rating','rating/<id>')
 	->defaults(array(
 		'controller' => 'rating',

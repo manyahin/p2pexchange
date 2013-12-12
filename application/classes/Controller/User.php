@@ -67,8 +67,9 @@ class Controller_User extends Controller_Site {
           }  
         }
 
-        if(in_array($this->user->id, $all_acceptors))
-          $merged_bids = true;  
+        if(isset($this->user->id))
+          if(in_array($this->user->id, $all_acceptors))
+            $merged_bids = true;  
 
       }
     }
@@ -143,8 +144,11 @@ class Controller_User extends Controller_Site {
     $this->template->content = $view;
   }
 
-  public function action_create() 
+  public function action_register() 
   {
+    if(isset($this->user)) 
+      $this->redirect('/');
+
     $this->template->content = View::factory('user/create')
       ->bind('errors', $errors)
       ->bind('message', $message);
@@ -213,7 +217,7 @@ class Controller_User extends Controller_Site {
     Auth::instance()->logout();
     
     // Redirect to login page
-    $this->redirect('user/login');
+    $this->redirect('/');
   }
 
 }
