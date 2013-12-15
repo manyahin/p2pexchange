@@ -20,11 +20,26 @@ class Controller_Rating extends Controller_Site {
     if(!$acceptor->loaded()) // Check for this bid have acception from this user;
       die('You do not have acceptions with this user!');
 
-    $rating = ORM::factory('rating')
-      ->where('from_user_id','=', $this->user->id)
-      ->and_where('to_user_id','=', $bid->user->id)
-      ->and_where('accept_id','=', $acceptor->id)
-      ->find();
+    $rating_to_user = false;
+    if($acceptor->created_user_id == $this->user->id) {
+      // this user create bid
+      $rating = ORM::factory('rating')
+        ->where('from_user_id','=', $this->user->id)
+        ->and_where('to_user_id','=', $acceptor->accept_user_id)
+        ->and_where('accept_id','=', $acceptor->id)
+        ->find();
+
+      $rating_to_user = $acceptor->accept_user_id;
+    } else {
+      // this user accept bid
+      $rating = ORM::factory('rating')
+        ->where('from_user_id','=', $this->user->id)
+        ->and_where('to_user_id','=', $bid->user->id)
+        ->and_where('accept_id','=', $acceptor->id)
+        ->find();
+
+      $rating_to_user = $bid->user->id;
+    }
 
     if($rating->loaded())
       die('You already set rating fot this bid!');
@@ -41,17 +56,15 @@ class Controller_Rating extends Controller_Site {
       if(!in_array($values['rating'], array(2,1,-1,-2)))
         $error = 'Bad rating';
 
+      if(empty($rating_to_user))
+        die('Unknown user');
+
       // add rating;
       if(!$error) {
         $rating = ORM::factory('rating');
         $rating->accept_id = $acceptor->id;
         $rating->from_user_id = $this->user->id;
-
-        if($acceptor->created_user_id == $this->user->id) 
-          $rating->to_user_id = $acceptor->accept_user_id;
-        else 
-          $rating->to_user_id = $bid->user->id;
-
+        $rating->to_user_id = $rating_to_user;
         $rating->rating = $values['rating'];
         $rating->comment = $values['comment'];
         $rating->date_created = DB::expr('NOW()');  
