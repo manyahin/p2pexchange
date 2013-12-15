@@ -25,7 +25,7 @@ class Controller_Rating extends Controller_Site {
     // logics
     if (HTTP_Request::POST == $this->request->method())
     {
-      
+
       $values = Arr::extract($this->request->post(), array('rating','comment'));
 
       if(!in_array($values['rating'], array(2,1,-1,-2)))
@@ -43,6 +43,8 @@ class Controller_Rating extends Controller_Site {
         $rating->save();
 
         $message = 'Rating set succeful';
+
+        $this->redirect();
       } 
     
     }
@@ -55,10 +57,10 @@ class Controller_Rating extends Controller_Site {
       ->bind('values', $values)
       ->bind('bid',$bid);
 
-    $this->auto_render = false;
-    $this->content = $view;
-    $this->response->body($this->content->render());
-
+    // $this->auto_render = false;
+    // $this->content = $view;
+    // $this->response->body($this->content->render());
+      $this->template->content = $view;
   } 
 
 }

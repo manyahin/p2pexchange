@@ -118,21 +118,23 @@ class Controller_User extends Controller_Site {
         $user = $user_db;
       }
       
-      // Get all users, who accept above one bid
-      $all_acceptors = array();
-      $bids = $user->bids->find_all();
-      if(count($bids) > 0) {
-        foreach ($bids as $key => $bid) {
-          $acceptors = $bid->acceptors->find_all();
-          if(count($acceptors) > 0) {
-            foreach ($acceptors as $key => $acceptor) {
-              if($acceptor->user->id === $this->user->id)
-              {
-                $merged_bids[$bid->id] = $bid;
+      if(isset($this->user->id)) {
+        // Get all users, who accept above one bid
+        $all_acceptors = array();
+        $bids = $user->bids->find_all();
+        if(count($bids) > 0) {
+          foreach ($bids as $key => $bid) {
+            $acceptors = $bid->acceptors->find_all();
+            if(count($acceptors) > 0) {
+              foreach ($acceptors as $key => $acceptor) {
+                if($acceptor->user->id === $this->user->id)
+                {
+                  $merged_bids[$bid->id] = $bid;
+                }
               }
             }
-          }
-        }  
+          }  
+        }
       }
 
     }
