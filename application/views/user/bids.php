@@ -34,7 +34,7 @@
             <? // TODO: this is not for view!
               $accept = ORM::factory('acceptor')
                 ->where('request_id', '=', $bid->id)
-                ->and_where('user_id', '=', $user->id)
+                ->and_where('accept_user_id', '=', $user->id)
                 ->find();
             ?>
             <td><?=$accept->date_created?></td>

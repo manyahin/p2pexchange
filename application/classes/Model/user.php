@@ -22,8 +22,6 @@ class Model_User extends Model_Auth_User {
 
     if($sum_rating > 0)
       return '+'.$sum_rating;
-    elseif($sum_rating < 0)
-      return '-'.$sum_rating;
     else
       return $sum_rating;
   }

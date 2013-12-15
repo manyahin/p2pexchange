@@ -134,7 +134,7 @@ class Controller_Bid extends Controller_Site {
     if($request->user_id == $this->user->id)
       $errors['error'] = 'Denied to accept yourself bid';
 
-    $double = $request->acceptors->where('user_id','=',$this->user->id)->find_all();
+    $double = $request->acceptors->where('accept_user_id','=',$this->user->id)->find_all();
     if(count($double) > 0) 
       $errors['error'] = 'Denied to again accept bid';
 
@@ -152,7 +152,8 @@ class Controller_Bid extends Controller_Site {
 
         $acceptor = ORM::factory('acceptor');
         $acceptor->request_id = $request_id;
-        $acceptor->user_id = $this->user->id;
+        $acceptor->accept_user_id = $this->user->id;
+        $acceptor->created_user_id = $request->user->id;
         $acceptor->date_created = DB::expr('NOW()');
         $acceptor->save();
       

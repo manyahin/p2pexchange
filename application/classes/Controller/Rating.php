@@ -9,13 +9,23 @@ class Controller_Rating extends Controller_Site {
     if(!$bid->loaded()) // Check of bid exist;
       die('This bid do not exists!');
 
-    $acceptor = $bid->acceptors->where('user_id','=',$this->user->id)->find();
+    $acceptor = $bid->acceptors
+      ->where_open()
+        ->where('created_user_id','=', $this->user->id)
+        ->or_where('accept_user_id','=', $this->user->id)
+      ->where_close()
+      ->and_where('request_id','=', $bid->id)
+      ->find(); // Find acceptors for this user
+
     if(!$acceptor->loaded()) // Check for this bid have acception from this user;
       die('You do not have acceptions with this user!');
 
-    $rating = $acceptor->rating->where('from_user_id','=',$this->user->id)
-      ->and_where('to_user_id','=',$bid->user_id)
-      ->and_where('accept_id','=',$acceptor->id); // Check for double set ratings;
+    $rating = ORM::factory('rating')
+      ->where('from_user_id','=', $this->user->id)
+      ->and_where('to_user_id','=', $bid->user->id)
+      ->and_where('accept_id','=', $acceptor->id)
+      ->find();
+
     if($rating->loaded())
       die('You already set rating fot this bid!');
 
@@ -36,7 +46,12 @@ class Controller_Rating extends Controller_Site {
         $rating = ORM::factory('rating');
         $rating->accept_id = $acceptor->id;
         $rating->from_user_id = $this->user->id;
-        $rating->to_user_id = $bid->user_id;
+
+        if($acceptor->created_user_id == $this->user->id) 
+          $rating->to_user_id = $acceptor->accept_user_id;
+        else 
+          $rating->to_user_id = $bid->user->id;
+
         $rating->rating = $values['rating'];
         $rating->comment = $values['comment'];
         $rating->date_created = DB::expr('NOW()');  
@@ -44,7 +59,7 @@ class Controller_Rating extends Controller_Site {
 
         $message = 'Rating set succeful';
 
-        $this->redirect();
+        $this->redirect('my/ratings');
       } 
     
     }

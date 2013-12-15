@@ -45,7 +45,7 @@
           if(isset($user) && $user->id) {
             $accept_orm = ORM::factory('acceptor')
               ->where('request_id','=',$request->id)
-              ->and_where('user_id','=',$user->id)
+              ->and_where('accept_user_id','=',$user->id)
               ->find(); 
             if($accept_orm->loaded())
               $accept = true;

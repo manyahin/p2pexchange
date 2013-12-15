@@ -61,7 +61,7 @@ class Controller_User extends Controller_Site {
             $acceptors = $bid->acceptors->find_all();
             if(count($acceptors) > 0) {
               foreach ($acceptors as $key => $acceptor) {
-                array_push($all_acceptors, $acceptor->user->id); 
+                array_push($all_acceptors, $acceptor->accept_user->id); 
               }
             }
           }  
@@ -127,7 +127,7 @@ class Controller_User extends Controller_Site {
             $acceptors = $bid->acceptors->find_all();
             if(count($acceptors) > 0) {
               foreach ($acceptors as $key => $acceptor) {
-                if($acceptor->user->id === $this->user->id)
+                if($acceptor->accept_user->id === $this->user->id)
                 {
                   $merged_bids[$bid->id] = $bid;
                 }
