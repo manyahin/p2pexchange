@@ -1,24 +1,28 @@
-<h3><?=__('Login')?></h3>
-<? if ($message) : ?>
-  <h3 class="message">
-    <?= $message; ?>
-  </h3>
-<? endif; ?>
+<div class="row">
+  <div class="small-6 columns">
+    <h3><?=__('Login')?></h3>
+    <? if ($message) : ?>
+      <h3 class="message">
+        <?= $message; ?>
+      </h3>
+    <? endif; ?>
 
-<?= Form::open('user/login'); ?>
+    <?= Form::open('user/login'); ?>
 
-<?= Form::label('username', 'Username'); ?>
-<?= Form::input('username', HTML::chars(Arr::get($_POST, 'username'))); ?>
+    <?= Form::label('username', 'Username'); ?>
+    <?= Form::input('username', HTML::chars(Arr::get($_POST, 'username'))); ?>
 
-<?= Form::label('password', 'Password'); ?>
-<?= Form::password('password'); ?>
+    <?= Form::label('password', 'Password'); ?>
+    <?= Form::password('password'); ?>
 
-<?= Form::label('remember', 'Remember Me'); ?>
-<?= Form::checkbox('remember'); ?>
+    <?= Form::checkbox('remember', null, false, array('id' => 'remember')); ?>
+    <?= Form::label('remember', 'Remember Me'); ?>
 
-<p>(Remember Me keeps you logged in for 2 weeks)</p>
+    <p>(Remember Me keeps you logged in for 2 weeks)</p>
 
-<?= Form::submit('login', 'Login'); ?>
-<?= Form::close(); ?>
+    <?= Form::submit('login', 'Login', array('class' => 'button')); ?>
+    <?= Form::close(); ?>
 
-<p>Or <?= HTML::anchor('user/create', 'create a new account'); ?></p>
+    <p>Or <?= HTML::anchor('register', 'create a new account'); ?></p>
+  </div>
+</div>

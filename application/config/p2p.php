@@ -2,5 +2,6 @@
 
 return array(
   'title' => 'P2P Exchange Service',
-  'description' => 'Trade platform for change any currencies'
+  'description' => 'Trade platform for change any currencies',
+  'email' => 'info@p2p.local',
 );

@@ -43,7 +43,7 @@
 
       <?= Form::label('comment', 'Comment'); ?>
       <?= Form::textarea('comment', Arr::get($values, 'comment')); ?>
-      <?= Form::button('submit', 'Create request', array('class' => 'button small round', 'type' => 'submit')); ?>
+      <?= Form::button('submit', 'Create request', array('class' => 'button', 'type' => 'submit')); ?>
     </div>
     <div class="large-6 columns">
       <div id="countries">

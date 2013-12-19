@@ -4,6 +4,10 @@ class Controller_Rating extends Controller_Site {
 
   public function action_set()
   {
+    $user = Auth::instance()->get_user();
+    if(!$user)
+      $this->redirect('/login');
+    
     $bid_id = $this->request->param('id');
     $bid = ORM::factory('request', $bid_id);
     if(!$bid->loaded()) // Check of bid exist;
@@ -72,7 +76,7 @@ class Controller_Rating extends Controller_Site {
 
         $message = 'Rating set succeful';
 
-        $this->redirect('my/ratings');
+        $this->redirect('user/ratings');
       } 
     
     }

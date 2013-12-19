@@ -13,8 +13,6 @@
   font-size: 13px;
 }
 
-
-
 /* Forms */
 
 form .error {
@@ -28,4 +26,11 @@ form #methods input {
 
 form #methods label {
   margin-left: 2px;
+}
+
+/* Agreements */
+.terms {
+  padding: 10px;
+  border: 1px solid grey;
+  margin: 25px 0;
 }

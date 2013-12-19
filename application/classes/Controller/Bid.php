@@ -35,8 +35,9 @@ class Controller_Bid extends Controller_Site {
 
   public function action_create()
   {
-    if(!$this->user)
-      $this->redirect('/');
+    $user = Auth::instance()->get_user();
+    if(!$user)
+      $this->redirect('/login');
 
     $currencies = ORM::factory('currency')->find_all();
     $currencies_array = array(-1 => ''); // First empty element
@@ -124,7 +125,9 @@ class Controller_Bid extends Controller_Site {
 
   public function action_accept()
   {
-    if(!$this->user) $this->redirect('/user/login');
+    $user = Auth::instance()->get_user();
+    if(!$user)
+      $this->redirect('/login');
 
     $request_id = $this->request->param('id');
     $request = ORM::factory('request', $request_id);

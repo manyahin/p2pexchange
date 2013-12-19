@@ -6,12 +6,12 @@
 <? endif; ?>
 
 <dl class="sub-nav">
-  <dd class="active"><?=HTML::anchor('my/profile','Profile')?></dd>
-  <dd><?=HTML::anchor('my/ratings/','Ratings')?></dd>
-  <dd><?=HTML::anchor('my/settings/','Settings')?></dd>
-  <dd><?=HTML::anchor('my/status/','Status')?></dd>
-  <dd><?=HTML::anchor('my/bids/','Bids')?></dd>
-  <dd><?=HTML::anchor('my/subscription/','Subscription')?></dd>
+  <dd class="active"><?=HTML::anchor('user/profile','Profile')?></dd>
+  <dd><?=HTML::anchor('user/ratings/','Ratings')?></dd>
+  <dd><?=HTML::anchor('user/settings/','Settings')?></dd>
+  <dd><?=HTML::anchor('user/status/','Status')?></dd>
+  <dd><?=HTML::anchor('user/bids/','Bids')?></dd>
+  <dd><?=HTML::anchor('user/subscription/','Subscription')?></dd>
 </dl>
 
 <?= Form::open()?>
@@ -39,5 +39,5 @@
   <input type="text" name="qiwi">
   <label for="yandex">Yandex.Money (Do not use in Israel?)</label>
   <input type="text" name="yandex"> -->
-  <?= Form::button('submit', 'Save profil', array('class' => 'button small round', 'type' => 'submit')); ?>
+  <?= Form::button('submit', 'Save profile', array('class' => 'button', 'type' => 'submit')); ?>
 <?= Form::close()?>

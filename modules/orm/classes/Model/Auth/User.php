@@ -37,7 +37,7 @@ class Model_Auth_User extends ORM {
 				array(array($this, 'unique'), array('username', ':value')),
 			),
 			'password' => array(
-				array('not_empty'),
+				array('not_empty')
 			),
 			'email' => array(
 				array('not_empty'),
@@ -140,6 +140,7 @@ class Model_Auth_User extends ORM {
 	{
 		return Validation::factory($values)
 			->rule('password', 'min_length', array(':value', 8))
+			->rule('password_confirm', 'not_empty')
 			->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
 	}
 

@@ -5,13 +5,11 @@
     <tr>
       <th>ID</th>
       <th><?=__('User')?></th>
-      <th><?=__('Want Sum')?></th>
-      <th><?=__('Want Currency')?></th>
-      <th><?=__('Sell Sum')?></th>
-      <th><?=__('Sell Currency')?></th>
-      <th><?=__('Comment')?></th>
+      <th><?=__('Sell')?></th>
+      <th><?=__('Want')?></th>
       <th><?=__('Methods')?></th>
       <th><?=__('Country')?></th>
+      <th><?=__('Comment')?></th>
       <th><?=__('Date created')?></th>
       <th><?=__('Run')?></th>
     </tr>
@@ -21,11 +19,9 @@
     <tr>
       <td><a href="/bid/info/<?=$request->id?>"><?=$request->id?></a></td>
       <td><a href="/user/info/<?=$request->user->id?>"><?=$request->user->username?></a></td>
-      <td><?=$request->want_sum?></td>
-      <td><?=$request->want_currency_name->name?></td>
-      <td><?=$request->sell_sum?></td>
-      <td><?=$request->sell_currency_name->name?></td>
-      <td><?=$request->comment?></td>
+      <td><?=$request->sell_sum?> <strong><?=$request->sell_currency_name->name?><strong></td>
+      <td><?=$request->want_sum?> <strong><?=$request->want_currency_name->name?></strong></td>
+      
       <td>
       <?
         $methods = $request->methods->find_all();
@@ -37,6 +33,7 @@
       ?>
       </td>
       <td><?=$request->country->name?></td>
+      <td><?=$request->comment?></td>
       <td><?=date('H:i d.m.Y', strtotime($request->date_created))?></td>
       <td>
         <?

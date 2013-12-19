@@ -34,7 +34,7 @@
           <li><a href="/"><?=__('Index')?></a></li>
           <li><a href="/about" class="about"><?=__('About')?></a></li>
           <? if(isset($user)): ?>
-            <li><a href="/my/profile"><?=__('Profile')?></a></li>
+            <li><a href="/user/"><?=__('Profile')?></a></li>
             <li><a href="/bid/create" class="request"><?=__('New bid')?></a></li>
             <li><a href="/logout"><?=__('Logout')?></a></li>
           <? else: ?>

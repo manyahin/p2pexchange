@@ -15,6 +15,11 @@ class Controller_Site extends Controller_Template {
       $this->user = $auth_user;
       if($auth_user->has('roles',2))
         $this->user->admin = true;
+
+      // fix for unregister users, but with cookie and session
+      $usr = ORM::factory('user', $this->user->id);
+      if(!$usr->loaded())
+        Auth::instance()->logout();  
     }
 
     View::set_global('user',$this->user);
@@ -44,7 +49,40 @@ class Controller_Site extends Controller_Template {
     $this->template->styles = $styles;
 
     // Scripts
+    // 
+    
+    // User verification and terms accept
+    if($this->user)
+    {
+      if(!$this->user->verified)
+      {
+        if($this->request->controller() != 'User' ||
+          $this->request->action() != 'verify')
+            $this->redirect('/user/verify');
+      }
+      elseif(!$this->user->accept_terms)
+      { 
+        if($this->request->controller() != 'User' || 
+          $this->request->action() != 'terms')
+            $this->redirect('/user/terms');     
+      }
+    }
 
+  }
 
+  public function user_valid()
+  {
+    $user = Auth::instance()->get_user();
+    if(!$user) 
+      $this->redirect('/login');
+
+    if(!$user->verified)
+      $this->redirect('/user/verify');
+
+    if(!$user->accept_terms)
+      $this->redirect('/user/terms');
+
+    return true;
   } 
+
 }

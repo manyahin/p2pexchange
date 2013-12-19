@@ -30,4 +30,12 @@ class Model_User extends Model_Auth_User {
     return count(ORM::factory('rating')->where('to_user_id','=', $this->id)->find_all());
   }
 
+  public function verify_hash() {
+    return md5($this->email . $this->password . 'verify_link');
+  }
+
+  // public function verified() {
+  //   return ORM::factory('user', $this->id)->verified();
+  // }
+
 } // End User Model

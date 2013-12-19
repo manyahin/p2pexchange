@@ -131,6 +131,7 @@ Kohana::modules(array(
 	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'email'			 => MODPATH.'email', 			// https://github.com/shadowhand/email
 	));
 
 Cookie::$salt = '6fa7b1899c81eafcb0b2d84a5eba357f';
