@@ -58,3 +58,40 @@
 #16 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
 #17 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/index.php(118): Kohana_Request->execute()
 #18 {main} in /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/HTML.php:71
+2013-12-19 13:08:31 --- EMERGENCY: ErrorException [ 1 ]: Class 'Model_user/forgot_password' not found ~ MODPATH/orm/classes/Kohana/ORM.php [ 46 ] in file:line
+2013-12-19 13:08:31 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-19 15:45:30 --- EMERGENCY: ErrorException [ 1 ]: Call to a member function verify_hash() on a non-object ~ APPPATH/classes/Controller/User.php [ 358 ] in file:line
+2013-12-19 15:45:30 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-19 15:53:51 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected '$verify_link' (T_VARIABLE) ~ APPPATH/classes/Controller/User.php [ 362 ] in file:line
+2013-12-19 15:53:51 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-19 15:54:57 --- EMERGENCY: ErrorException [ 8 ]: Undefined property: Validation::$email ~ APPPATH/classes/Controller/User.php [ 357 ] in /Users/Manyahin/Dropbox/_projects/p2pexchange/www/application/classes/Controller/User.php:357
+2013-12-19 15:54:57 --- DEBUG: #0 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/application/classes/Controller/User.php(357): Kohana_Core::error_handler(8, 'Undefined prope...', '/Users/Manyahin...', 357, Array)
+#1 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Controller.php(84): Controller_User->action_forgot_password()
+#2 [internal function]: Kohana_Controller->execute()
+#3 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#4 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/index.php(118): Kohana_Request->execute()
+#7 {main} in /Users/Manyahin/Dropbox/_projects/p2pexchange/www/application/classes/Controller/User.php:357
+2013-12-19 16:01:32 --- EMERGENCY: ErrorException [ 1 ]: Call to a member function verify_password_hash() on a non-object ~ APPPATH/classes/Controller/User.php [ 363 ] in file:line
+2013-12-19 16:01:32 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-19 16:02:55 --- EMERGENCY: ErrorException [ 8 ]: Undefined variable: message ~ APPPATH/views/user/forgot_password.php [ 12 ] in /Users/Manyahin/Dropbox/_projects/p2pexchange/www/application/views/user/forgot_password.php:12
+2013-12-19 16:02:55 --- DEBUG: #0 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/application/views/user/forgot_password.php(12): Kohana_Core::error_handler(8, 'Undefined varia...', '/Users/Manyahin...', 12, Array)
+#1 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/View.php(61): include('/Users/Manyahin...')
+#2 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/View.php(348): Kohana_View::capture('/Users/Manyahin...', Array)
+#3 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/application/views/template.php(49): Kohana_View->__toString()
+#5 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/View.php(61): include('/Users/Manyahin...')
+#6 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/View.php(348): Kohana_View::capture('/Users/Manyahin...', Array)
+#7 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#11 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/system/classes/Kohana/Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#13 /Users/Manyahin/Dropbox/_projects/p2pexchange/www/index.php(118): Kohana_Request->execute()
+#14 {main} in /Users/Manyahin/Dropbox/_projects/p2pexchange/www/application/views/user/forgot_password.php:12

@@ -34,6 +34,10 @@ class Model_User extends Model_Auth_User {
     return md5($this->email . $this->password . 'verify_link');
   }
 
+  public function verify_password_hash() {
+    return md5($this->email . $this->password . 'verify_password_link');
+  }
+
   // public function verified() {
   //   return ORM::factory('user', $this->id)->verified();
   // }

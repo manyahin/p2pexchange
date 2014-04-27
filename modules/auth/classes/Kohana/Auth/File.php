@@ -34,10 +34,14 @@ class Kohana_Auth_File extends Auth {
 	 */
 	protected function _login($username, $password, $remember)
 	{
+		die();
+
 		if (is_string($password))
 		{
 			// Create a hashed password
 			$password = $this->hash($password);
+			
+			
 		}
 
 		if (isset($this->_users[$username]) AND $this->_users[$username] === $password)

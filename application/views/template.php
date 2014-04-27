@@ -18,7 +18,16 @@
       <div class="small-12 large-12 columns">
         <h1><?=__('Welcome to P2P Exchange service')?></h1>
       </div>
+
       <div class="small-12 large-12 columns">
+
+        <? if ($message) : ?>
+        <div data-alert class="alert-box success">
+          <?= $message; ?>
+          <a href="#" class="close">&times;</a>
+        </div>
+        <? endif; ?>
+        
         <p>
         <?php
         if(isset($user)) {

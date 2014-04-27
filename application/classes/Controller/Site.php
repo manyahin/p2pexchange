@@ -68,6 +68,18 @@ class Controller_Site extends Controller_Template {
       }
     }
 
+    // Messages from other controller via sessions
+    $message = '';
+
+    $session = Session::instance();
+    if($message = $session->get('message'))
+    {
+      $this->template->message = $message;
+      $session->delete('message');
+    } else {
+      $this->template->message = '';
+    }
+
   }
 
   public function user_valid()

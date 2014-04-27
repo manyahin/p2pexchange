@@ -23,6 +23,6 @@
     <?= Form::submit('login', 'Login', array('class' => 'button')); ?>
     <?= Form::close(); ?>
 
-    <p>Or <?= HTML::anchor('register', 'create a new account'); ?></p>
+    <p><?= HTML::anchor('/user/forgot_password', 'Forgot password?'); ?> · Don't have an account? <?= HTML::anchor('register', 'Create a new'); ?></p>
   </div>
 </div>

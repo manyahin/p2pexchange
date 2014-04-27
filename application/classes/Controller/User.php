@@ -20,6 +20,7 @@ class Controller_User extends Controller_Site {
         // Update user from POST data
         $user = ORM::factory('user', $this->user->id);
         $user->phone = $post['phone'];
+        $user->phone_verified = '0';
         $user->save();
         
         // Update data;
@@ -308,8 +309,9 @@ class Controller_User extends Controller_Site {
     {
       // Attempt to login user
       $remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
+
       $user = Auth::instance()->login($this->request->post('username'), $this->request->post('password'), $remember);
-      
+
       // If successful, redirect user
       if ($user) 
       {
@@ -333,6 +335,164 @@ class Controller_User extends Controller_Site {
 
     $view = View::factory('user/ratings')
       ->bind('acceptions', $acceptions);
+
+    $this->template->content = $view;
+  }
+
+  public function action_phone_code()
+  {
+    if(!$this->user)
+      die(json_encode(array('error' => __('You must be logged'))));
+    if(!$number = trim($this->request->post('number'),'+'))
+      die(json_encode(array('error' => __('Number is nescessary!'))));
+    if(!Phone::isPhone($number))
+      die(json_encode(array('error' => __('Number is invalid!'))));
+
+    if($code = intval($this->request->post('code')))
+    {
+      if($code == Session::instance()->get('sms_confirmation_code'))
+      {
+        Session::instance()->delete('sms_confirmation_code');
+
+        $this->user->phone_verified = '1';
+        $this->user->save();
+        
+        Session::instance()->set('message','Your phone number are verified');
+
+        die(json_encode(array('result' => __('verified'))));
+      }
+      else
+        die(json_encode(array('error' => __('Code is incorrect!'))));
+    }
+    else
+    {
+      if(!$last_sent = Session::instance()->get('last_sms_check_sent'))
+        $last_sent = 0;
+      if((time() - $last_sent) < 180)
+        die(json_encode(array('error' => __('You can get a confirmation code not oftener then one time in 3 minutes!'))));
+      else
+      {
+        if(!$code = Session::instance()->get('sms_confirmation_code'))
+        {
+          $code = rand(100000,999999);
+          Session::instance()->set('sms_confirmation_code',$code);
+        }
+        Phone::sendSms($number,__('Confirmation code:').' '.$code);
+        Session::instance()->set('last_sms_check_sent',time());
+        die(json_encode(array('result' => 'Ok')));
+      }
+    }
+  }
+
+  public function action_phone_verification()
+  {
+    
+
+     die(json_encode(array('result' => 'Ok')));
+
+    
+  }
+
+  public function action_forgot_password()
+  {
+    $user = Auth::instance()->get_user();
+    if($user)
+      $this->redirect('/');
+   
+    if (HTTP_Request::POST == $this->request->method()) 
+    {
+      $values = $this->request->post();
+
+      $email = Validation::factory($values)
+        ->rule('email', 'not_empty')
+        ->rule('email', 'email');
+      
+      if($email->check())
+      {
+        $validate_email = $values['email']; 
+
+        $email_user = ORM::factory('user')->where('email','=',$validate_email)->find();
+
+        if($email_user->loaded())
+        {
+          $secret_hash = $email_user->verify_password_hash();
+
+          $verify_link = HTML::anchor('/user/reset_password/' . $secret_hash, 'Reset Your Password');
+
+          $email_user->restore_password = $secret_hash;
+          $email_user->save();
+
+          $message = '<p>To reset your password click the URL below.</p><p>{{verify_link}}</p><p>If you did not request your password to be reset please ignore this email and your password will stay as it is.</p><p>The P2P Team</p>';
+          $message = str_replace('{{verify_link}}', $verify_link, $message);
+
+          $email = Email::send_mail($validate_email, 'Resetting Your Password', $message);
+
+          if(!$email)
+            die('Unknown error with mail function');
+
+          $message = 'Verification link send to Email';
+        } else {
+          $error = 'User with this Email not found';
+        }
+
+      } else {
+        $error = 'Incorrect Email';
+      }
+
+    }
+
+    $view = View::factory('user/forgot_password')
+      ->bind('error', $error)
+      ->bind('message', $message)
+      ->bind('values', $values);
+
+    $this->template->content = $view;
+  }
+
+  public function action_reset_password()
+  {
+    $user = Auth::instance()->get_user();
+    if($user)
+      $this->redirect('/');
+
+    $hash = $this->request->param('id');
+    if(empty($hash))
+      $this->redirect('/user/forgot_password/');
+
+    $user = ORM::factory('user')
+      ->where('restore_password','=',$hash)
+      ->find();
+
+    if(!$user->loaded())
+      $this->redirect('/user/forgot_password/');
+    
+    if(HTTP_Request::POST == $this->request->method()) 
+    {
+      $values = $this->request->post();
+
+      $password = $user->get_password_validation($values);
+      if($password->check())
+      {
+        $user->password = $values['password'];
+        $user->restore_password = NULL;
+        $user->save();
+
+        $session = Session::instance();
+        $session->set('message', 'Password are changed, try to login.');
+
+        $this->redirect('/');
+      } 
+      else
+      {
+        // $error = $password->errors();
+        $error = 'Some incorrect in password';
+      }
+    }
+
+    $view = View::factory('user/reset_password')
+      ->bind('error', $error)
+      ->bind('message', $message)
+      ->bind('values', $values);
 
     $this->template->content = $view;
   }

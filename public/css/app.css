@@ -28,6 +28,13 @@ form #methods label {
   margin-left: 2px;
 }
 
+form .form_error {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  color: crimson;
+  font-size: 12px;
+}
+
 /* Agreements */
 .terms {
   padding: 10px;
